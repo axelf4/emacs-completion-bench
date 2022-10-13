@@ -55,6 +55,7 @@
       (needles '("f" "cldbi" "emacs" "nixemacsnix"))
       (completion-ignore-case t)
       (styles `(basic
+                substring
                 hotfuzz
                 flex
                 (fussy . flx-score)

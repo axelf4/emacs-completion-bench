@@ -7,7 +7,11 @@ The styles included in this benchmark are
 
 * The builtin `basic` style.
   
-  Not fuzzy in the slightest. Implemented in C. Only included as a baseline.
+  Prefix completion implemented in C.
+  Not fuzzy in the slightest and only included as a baseline.
+* The builtin `substring` style.
+
+  Matches if the completion contains a contiguous substring of the search string.
 * The builtin `flex` style.
   
   "Greedy" fuzzy algorithm in Emacs Lisp.
@@ -48,6 +52,8 @@ The styles included in this benchmark are
   
 The benchmark consists of completing against a list of candidate completions
 of length 95653, with the median length of each string being 37.
+About 30% are interned symbols taken from `obarray` of an Emacs session,
+and the rest are relative file paths.
 The search strings are of length between one and ten.
 
 Case-insensitive matching is used,
@@ -71,6 +77,7 @@ the resulting times were
 | Style                |      Time (s) | #GC |        GC time (s) |    Rel |
 |----------------------|--------------:|----:|-------------------:|-------:|
 | `basic`              |   0.264177651 |   0 |                0.0 |   0.39 |
+| `substring`          |   3.927441556 |   7 | 0.8942112610000006 |   5.82 |
 | `hotfuzz`            |   0.675077483 |   0 |                0.0 |      1 |
 | `flex`               |  10.659162948 |   9 | 1.1566389280000005 |  15.78 |
 | `fussy`/`flx`        |  20.459863556 |  51 |       11.053008226 |  30.31 |
